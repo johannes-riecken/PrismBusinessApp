@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -227,35 +221,10 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             Assert.IsFalse(target.DecrementCountCommand.CanExecute());
         }
 
-        // Note: The remove method is a WIP
-        //[TestMethod]
-        //public void Remove_Item_From_Collection()
-        //{
-        //    var shoppingCartRepository = new MockShoppingCartRepository();
-        //    var navigationService = new MockNavigationService();
-        //    var accountManager = new MockAccountManager();
 
-        //    shoppingCartRepository.GetShoppingCartAsyncDelegate = (userId) =>
-        //    {
-        //        ShoppingCart shoppingCart = null;
-        //        var shoppingCartItems = new ObservableCollection<ShoppingCartItem> { new ShoppingCartItem() { Item = new Item() }, new ShoppingCartItem() { Item = new Item() } };
-        //        shoppingCart = new ShoppingCart(shoppingCartItems) { FullPrice = 200, TotalDiscount = 100 };
 
-        //        return Task.FromResult(shoppingCart);
-        //    };
 
-        //    shoppingCartRepository.RemoveItemFromShoppingCartAsyncDelegate = (userId, itemId)  =>
-        //    {
-        //        return Task.FromResult(true);
-        //    };
 
-        //    var viewModel = new ShoppingCartPageViewModel(shoppingCartRepository, navigationService, accountManager);
-        //    viewModel.OnNavigatedTo("JohnDoe", NavigationMode.New, null);
-        //    Assert.AreEqual(2, viewModel.ShoppingCartItemViewModels.Count);
-        //    var cartItem = viewModel.ShoppingCartItemViewModels.First();
-        //    viewModel.Remove(cartItem);
-        //    Assert.AreEqual(1, viewModel.ShoppingCartItemViewModels.Count);
-        //}
 
     }
 }

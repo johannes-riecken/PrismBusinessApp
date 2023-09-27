@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -127,13 +121,11 @@ namespace AdventureWorks.UILogic.Repositories
             address.Id = address.Id ?? Guid.NewGuid().ToString();
             address.AddressType = AddressType.Shipping;
 
-            // If there's no default value stored, use this one
             if (await GetDefaultShippingAddressAsync() == null)
             {
                 address.IsDefault = true;
             }
 
-            // Save the address to the service
             await _addressService.SaveAddressAsync(address);
             
             ExpireCachedAddresses();
@@ -146,13 +138,11 @@ namespace AdventureWorks.UILogic.Repositories
             address.Id = address.Id ?? Guid.NewGuid().ToString();
             address.AddressType = AddressType.Billing;
 
-            // If there's no default value stored, use this one
             if (await GetDefaultBillingAddressAsync() == null)
             {
                 address.IsDefault = true;
             }
 
-            // Save the address in the service
             await _addressService.SaveAddressAsync(address);
 
             ExpireCachedAddresses();
@@ -164,8 +154,6 @@ namespace AdventureWorks.UILogic.Repositories
 
             paymentMethod.Id = paymentMethod.Id ?? Guid.NewGuid().ToString();
 
-            // Sensitive data replaced with asterisks. Configure secure transport layer (SSL)
-            // so that you can securely send sensitive data such as credit card data.
             var paymentMethodToSave = new PaymentMethod()
                 {
                     Id = paymentMethod.Id,
@@ -177,13 +165,11 @@ namespace AdventureWorks.UILogic.Repositories
                     CardVerificationCode = paymentMethod.CardVerificationCode
                 };
 
-            // If there's no default value stored, use this one
             if (await GetDefaultPaymentMethodAsync() == null)
             {
                 paymentMethodToSave.IsDefault = true;
             }
 
-            // Save the payment method to the service
             await _paymentMethodService.SavePaymentMethodAsync(paymentMethodToSave);
 
             ExpireCachedPaymentMethods();

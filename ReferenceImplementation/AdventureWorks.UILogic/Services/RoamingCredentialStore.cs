@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -21,7 +15,6 @@ namespace AdventureWorks.UILogic.Services
 
             RemoveAllCredentialsByResource(resource, vault);
 
-            // Add the new credential 
             var passwordCredential = new PasswordCredential(resource, userName, password);
             vault.Add(passwordCredential); 
         }
@@ -30,7 +23,6 @@ namespace AdventureWorks.UILogic.Services
         {
             try
             {
-                // Remove the old credentials for this resource
                 var oldCredentials = vault.FindAllByResource(resource);
                 foreach (var oldCredential in oldCredentials)
                 {
@@ -54,7 +46,6 @@ namespace AdventureWorks.UILogic.Services
                 else
                     return null;
             }
-            // The password vault throws System.Exception if no credentials have been stored with this resource.
             catch (Exception)
             {
                 return null;

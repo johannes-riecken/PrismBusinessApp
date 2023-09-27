@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -46,7 +40,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
                 };
             var orderService = new MockOrderService()
                 {
-                    // the order is valid, it can be processed
                     ProcessOrderAsyncDelegate = (o) => Task.FromResult(true)
                 };
             var resourcesService = new MockResourceLoader()
@@ -79,7 +72,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
                 };
             var orderService = new MockOrderService()
                 {
-                    // the order is invalid, it cannot be processed
                     ProcessOrderAsyncDelegate = (o) =>
                         {
                             var modelValidationResult = new ModelValidationResult();

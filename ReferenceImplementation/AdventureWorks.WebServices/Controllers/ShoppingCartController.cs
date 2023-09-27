@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Web.Http;
@@ -20,7 +14,6 @@ namespace AdventureWorks.WebServices.Controllers
     {
         private IShoppingCartRepository _shoppingCartRepository;
         private IProductRepository _productRepository;
-        // Need to lock to prevent concurrent shopping cart modifications because of using static memory for carts in the repositories
         private static object _lock = new object();
 
         public ShoppingCartController()
@@ -33,13 +26,11 @@ namespace AdventureWorks.WebServices.Controllers
             _productRepository = productRepository;
         }
 
-        // GET /api/ShoppingCart/id
         public ShoppingCart Get(string id)
         {
             return _shoppingCartRepository.GetById(id);
         }
 
-        // POST /api/ShoppingCart/{id}?productIdToIncrement={productIdToIncrement}
         [HttpPost]
         public void AddProductToShoppingCart(string id, string productIdToIncrement)
         {
@@ -55,9 +46,6 @@ namespace AdventureWorks.WebServices.Controllers
             }
         }
 
-        // POST /api/ShoppingCart/{id}?productIdToIncrement={productIdToIncrement}
-        //This action decrements the quantity of an item in the shopping cart. 
-        //For example, if a shopping cart has 3 socks, this action will update the quantity to 2.
         [HttpPost]
         public void RemoveProductFromShoppingCart(string id, string productIdToDecrement)
         {
@@ -76,7 +64,6 @@ namespace AdventureWorks.WebServices.Controllers
             }
         }
 
-        // DELETE /api/ShoppingCart/{id}
         public void DeleteShoppingCart(string id)
         {
             if (!_shoppingCartRepository.Delete(id))
@@ -85,9 +72,6 @@ namespace AdventureWorks.WebServices.Controllers
             }
         }
 
-        // PUT /api/ShoppingCart/{id}?itemIdToRemove={itemIdToRemove}
-        //This action removes the entire item group from the shopping cart. 
-        //For example, if a shopping cart has 2 socks and 3 bikes, this action will remove socks.
         [HttpPut]
         public void RemoveShoppingCartItem(string id, string itemIdToRemove)
         {
@@ -107,7 +91,6 @@ namespace AdventureWorks.WebServices.Controllers
             }
         }
 
-        // POST /api/ShoppingCart/{id}?oldShoppingCartId={oldShoppingCartId}
         [HttpPost]
         public bool MergeShoppingCarts(string id, string anonymousShoppingCartId)
         {
@@ -125,7 +108,6 @@ namespace AdventureWorks.WebServices.Controllers
 
                 if (anonymousShoppingCart != null)
                 {
-                    //Merge shopping carts by adding items from anonymous cart to authenticated cart.
                     foreach (var shoppingCartItem in anonymousShoppingCart.ShoppingCartItems)
                     {
                         for (int i = 0; i < shoppingCartItem.Quantity; i++)
@@ -134,7 +116,6 @@ namespace AdventureWorks.WebServices.Controllers
                         }
                     }
 
-                    //Delete anonymous cart
                     _shoppingCartRepository.Delete(anonymousShoppingCartId);
                 }
                 return shoppingCartMerged;

@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -118,7 +112,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             {
                 VerifyUserAuthenticationAsyncDelegate = () =>
                     {
-                        // The process starts with a call to retrieve the logged user
                         formProcessStarted = true;
                         return Task.FromResult(new UserInfo());
                     }
@@ -129,7 +122,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             var target = new CheckoutHubPageViewModel(new MockNavigationService(), accountService, null, null,
                                                        shippingAddressPageViewModel, billingAddressPageViewModel, paymentMethodPageViewModel, null, null);
 
-            // ShippingAddress invalid only
             shippingAddressPageViewModel.ValidateFormDelegate = () => false;
             billingAddressPageViewModel.ValidateFormDelegate = () => true;
             paymentMethodPageViewModel.ValidateFormDelegate = () => true;
@@ -137,14 +129,12 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
 
             Assert.IsFalse(formProcessStarted);
 
-            // BillingAddress invalid only
             shippingAddressPageViewModel.ValidateFormDelegate = () => true;
             billingAddressPageViewModel.ValidateFormDelegate = () => false;
             paymentMethodPageViewModel.ValidateFormDelegate = () => true;
 
             Assert.IsFalse(formProcessStarted);
 
-            // PaymentMethod invalid only
             shippingAddressPageViewModel.ValidateFormDelegate = () => true;
             billingAddressPageViewModel.ValidateFormDelegate = () => true;
             paymentMethodPageViewModel.ValidateFormDelegate = () => false;
@@ -214,7 +204,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
                 };
             billingAddressPageViewModel.ProcessFormAsyncDelegate = () =>
                 {
-                    // The Address have to be updated before the form is processed
                     Assert.IsTrue(compareAddressesFunc(shippingAddressPageViewModel.Address, billingAddressPageViewModel.Address));
                     return Task.Delay(0);
                 };
@@ -232,7 +221,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
                 {
                     CreateBasicOrderAsyncDelegate = (userId, shoppingCart, shippingAddress, billingAddress, paymentMethod) =>
                         {
-                            // The Address information stored in the order must be the same
                             Assert.IsTrue(compareAddressesFunc(shippingAddress, billingAddress));
                             return Task.FromResult<Order>(new Order());
                         }

@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -26,7 +20,6 @@ namespace EventAggregatorQuickstart
             var threadId = Environment.CurrentManagedThreadId;
             var count = cart.Count;
 
-            // Assign into local variable because it is meant to be fire and forget and calling would require an await/async
             var dialogAction = _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
                     MessageDialog dialog = new MessageDialog(string.Format(CultureInfo.InvariantCulture, 

@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -49,7 +43,6 @@ namespace AdventureWorks.UILogic.Tests.Repositories
         public async Task GetCategories_Uses_Cache_When_Data_Available()
         {
             var cacheService = new MockCacheService();
-            // cacheService.DataExistsAndIsValidAsyncDelegate = s => Task.FromResult(true);
             
             var categories = new List<Category>
             {

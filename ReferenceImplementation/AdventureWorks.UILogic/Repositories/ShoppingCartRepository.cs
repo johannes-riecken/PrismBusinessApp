@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using AdventureWorks.UILogic.Models;
@@ -62,7 +56,6 @@ namespace AdventureWorks.UILogic.Repositories
             _cachedShoppingCart = null;
             if (e.NewUserInfo != null)
             {
-                // User successfully signed in.
                 if (e.OldUserInfo == null)
                 {
                     shoppingCartMerged = await _shoppingCartService.MergeShoppingCartsAsync(_shoppingCartId, e.NewUserInfo.UserName);
@@ -71,7 +64,6 @@ namespace AdventureWorks.UILogic.Repositories
             }
             else
             {
-                // User signed out.
                 _shoppingCartId = Guid.NewGuid().ToString();
             }
 
@@ -80,9 +72,6 @@ namespace AdventureWorks.UILogic.Repositories
             
             if (shoppingCartMerged)
             {
-                // At this point, you could notify the user that their shopping cart was merged
-                // with their online shopping cart. If you do this, follow these guidelines:
-                // http://msdn.microsoft.com/en-us/library/windows/apps/hh465304.aspx#flyouts
             }
         }
 
@@ -118,13 +107,11 @@ namespace AdventureWorks.UILogic.Repositories
 
         private void RaiseShoppingCartUpdated()
         {
-            // Documentation on loosely coupled communication is at http://go.microsoft.com/fwlink/?LinkID=288820&clcid=0x409
             _eventAggregator.GetEvent<ShoppingCartUpdatedEvent>().Publish(null);
         }
 
         private void RaiseShoppingCartItemUpdated()
         {
-            // Documentation on loosely coupled communication is at http://go.microsoft.com/fwlink/?LinkID=288820&clcid=0x409
             _eventAggregator.GetEvent<ShoppingCartItemUpdatedEvent>().Publish(null);
         }
     }

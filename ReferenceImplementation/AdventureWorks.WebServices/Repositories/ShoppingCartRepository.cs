@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -16,9 +10,7 @@ namespace AdventureWorks.WebServices.Repositories
 {
     public class ShoppingCartRepository : IShoppingCartRepository
     {
-        // key: user | value: shopping cart items
         private static Dictionary<string, ShoppingCart> _shoppingCarts = GetDefaultShoppingCarts();
-        // Can't lock on _shoppingCarts because it gets overwritten in Reset method
         private static object _lock = new object();
 
         private static Dictionary<string, ShoppingCart> GetDefaultShoppingCarts()

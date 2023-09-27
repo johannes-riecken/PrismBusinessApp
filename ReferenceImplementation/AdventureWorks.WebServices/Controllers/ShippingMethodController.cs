@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -29,7 +23,6 @@ namespace AdventureWorks.WebServices.Controllers
             _shippingMethodRepository = shippingMethodRepository;
         }
 
-        // GET /api/ShippingMethod/
         [HttpGet]
         [ActionName("defaultAction")]
         public IEnumerable<ShippingMethod> GetShippingMethods()
@@ -37,7 +30,6 @@ namespace AdventureWorks.WebServices.Controllers
             return _shippingMethodRepository.GetAll();
         }
 
-        // GET /api/ShippingMethod/basic
         [HttpGet]
         [ActionName("basic")]
         public ShippingMethod GetBasicShippingMethod()

@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Collections.Generic;
@@ -29,14 +23,12 @@ namespace AdventureWorks.WebServices.Controllers
             _paymentMethodRepository = paymentMethodRepository;
         }
 
-        // GET /api/PaymentMethod
         [Authorize]
         public IEnumerable<PaymentMethod> GetAll()
         {
             return _paymentMethodRepository.GetAll(this.User.Identity.Name);
         }
 
-        // POST /api/PaymentMethod
         [Authorize]
         public HttpResponseMessage PostAddress(PaymentMethod paymentMethod)
         {
@@ -54,7 +46,6 @@ namespace AdventureWorks.WebServices.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, true);
         }
 
-        // PUT /api/PaymentMethod?defaultPaymentMethodId=[defaultAddressId]
         [Authorize]
         public HttpResponseMessage Put(string defaultPaymentMethodId)
         {

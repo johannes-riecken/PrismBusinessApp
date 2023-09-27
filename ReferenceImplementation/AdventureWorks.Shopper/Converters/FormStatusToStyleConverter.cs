@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -14,10 +8,6 @@ using Windows.UI.Xaml.Data;
 
 namespace AdventureWorks.Shopper.Converters
 {
-    /// <summary>
-    /// Value converter that translates FormStatus.Complete to ValidFormStatus{commandParameter}Style
-    /// and the others to InvalidFormStatus{commandParameter}Style.
-    /// </summary>
     public sealed class FormStatusToStyleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

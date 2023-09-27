@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using Microsoft.Xaml.Interactivity;
@@ -25,7 +19,6 @@ namespace AdventureWorks.Shopper.Behaviors
         public string EventArgsParameterPath { get; set; }
         object IAction.Execute(object sender, object parameter)
         {
-            //Walk the ParameterPath for nested properties.
             var propertyPathParts = EventArgsParameterPath.Split('.');
             object propertyValue = parameter;
             foreach (var propertyPathPart in propertyPathParts)

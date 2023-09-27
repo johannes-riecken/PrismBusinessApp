@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Globalization;
@@ -29,7 +23,6 @@ namespace AdventureWorks.WebServices.Controllers
             _productRepository = productRepository;
         }
 
-        // GET /api/TileNotification
 
         public HttpResponseMessage GetTileNotification()
         {
@@ -37,21 +30,17 @@ namespace AdventureWorks.WebServices.Controllers
                                             "Mountain-400-W Red, 42");
             tileXml = string.Format(CultureInfo.InvariantCulture, tileXml, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString());
 
-            // create HTTP response
            var response = new HttpResponseMessage();
 
-            // format response
             response.StatusCode = System.Net.HttpStatusCode.OK;
             response.Content = new StringContent(tileXml);
 
-            //Need to return xml format to TileUpdater.StartPeriodicUpdate
             response.Content.Headers.ContentType = 
                 new System.Net.Http.Headers.MediaTypeHeaderValue("text/xml");
             return response;
         } 
 
 
-        // GET /api/TileNotification?categoryId={categoryId}/id
 
         public HttpResponseMessage GetSecondaryTileNotification(string id)
         {
@@ -63,14 +52,11 @@ namespace AdventureWorks.WebServices.Controllers
 
             var tileXml = GetSecondaryTileXml(product.ImageUri.AbsoluteUri, product.Title);
 
-            // Create HTTP response
             var response = new HttpResponseMessage();
 
-            // Format response
             response.StatusCode = System.Net.HttpStatusCode.OK;
             response.Content = new StringContent(tileXml);
 
-            // Need to return xml format to TileUpdater.StartPeriodicUpdate
             response.Content.Headers.ContentType =
                 new System.Net.Http.Headers.MediaTypeHeaderValue("text/xml");
             return response;

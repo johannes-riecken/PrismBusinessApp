@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using AdventureWorks.WebServices.Models;
@@ -17,8 +11,6 @@ namespace AdventureWorks.WebServices.Controllers
 {
     public class ProductController : ApiController
     {
-        // Another approach to bounding the search result set to a fixed number is to
-        // implement ISupportIncrementalLoading
         private const int MaxSearchResults = 1000;
 
         private IProductRepository _productRepository;
@@ -32,13 +24,11 @@ namespace AdventureWorks.WebServices.Controllers
             _productRepository = productRepository;
         }
 
-        // GET /api/Product
         public IEnumerable<Product> GetProducts()
         {
             return _productRepository.GetProducts();
         }
 
-        // GET /api/Product/id
         public Product GetProduct(string id)
         {
             var item = _productRepository.GetProduct(id);
@@ -51,7 +41,6 @@ namespace AdventureWorks.WebServices.Controllers
             return item;
         }
 
-        // GET /api/Product?queryString={queryString}
         public SearchResult GetSearchResults(string queryString)
         {
             var fullsearchResult = _productRepository.GetProducts().Where(p => p.Title.ToUpperInvariant().Contains(queryString.ToUpperInvariant()));
@@ -66,7 +55,6 @@ namespace AdventureWorks.WebServices.Controllers
 
         }
 
-        // GET /api/Product?categoryId={categoryId}
         public IEnumerable<Product> GetProducts(int categoryId)
         {
             if (categoryId == 0)

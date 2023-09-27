@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -102,7 +96,6 @@ namespace AdventureWorks.UILogic.ViewModels
         {
             var errors = new Dictionary<string, ReadOnlyCollection<string>>();
 
-            // Property keys format: address.{Propertyname}
             foreach (var propkey in modelValidationResults.ModelState.Keys)
             {
                 string propertyName = propkey.Substring(propkey.IndexOf('.') + 1); // strip off order. prefix

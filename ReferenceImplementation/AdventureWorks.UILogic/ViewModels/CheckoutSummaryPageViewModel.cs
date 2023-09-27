@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -99,9 +93,6 @@ namespace AdventureWorks.UILogic.ViewModels
             get { return _isBottomAppBarOpened; }
             set 
             {
-                // We always fire the PropertyChanged event because the 
-                // AppBar.IsOpen property doesn't notify when the property is set.
-                // See http://go.microsoft.com/fwlink/?LinkID=288840
                 _isBottomAppBarOpened = value;
                 OnPropertyChanged("IsBottomAppBarOpened");
             }
@@ -159,7 +150,6 @@ namespace AdventureWorks.UILogic.ViewModels
             {
                 if (SetProperty(ref _selectedCheckoutData, value))
                 {
-                    // Display the AppBar if there is a something selected
                     IsBottomAppBarOpened = (_selectedCheckoutData != null);
                 }
             }
@@ -173,7 +163,6 @@ namespace AdventureWorks.UILogic.ViewModels
                 var oldValue = _selectedAllCheckoutData;
                 if (SetProperty(ref _selectedAllCheckoutData, value) && value != null && oldValue != null)
                 {
-                    // Update the CheckoutData of the Order
                     UpdateOrderCheckoutData(_selectedAllCheckoutData);
                 }
             }
@@ -194,26 +183,21 @@ namespace AdventureWorks.UILogic.ViewModels
 
         public override async void OnNavigatedTo(object navigationParameter, NavigationMode navigationMode, Dictionary<string, object> viewModelState)
         {
-            // Get latest shopping cart
             var shoppingCart = await _shoppingCartRepository.GetShoppingCartAsync();
             _order = _orderRepository.CurrentOrder;
             _order.ShoppingCart = shoppingCart;
 
-            // Populate the ShoppingCart items
             var shoppingCartItemVMs = _order.ShoppingCart.ShoppingCartItems.Select(item => new ShoppingCartItemViewModel(item, _resourceLoader));
             ShoppingCartItemViewModels = new ReadOnlyCollection<ShoppingCartItemViewModel>(shoppingCartItemVMs.ToList());
 
-            // Populate the ShippingMethods and set the selected one
             var shippingMethods = await _shippingMethodService.GetShippingMethodsAsync();
             ShippingMethods = new ReadOnlyCollection<ShippingMethod>(shippingMethods.ToList());
             SelectedShippingMethod = _order.ShippingMethod != null ? ShippingMethods.FirstOrDefault(c => c.Id == _order.ShippingMethod.Id) : null;
 
-            // Update order's address and payment information
             _order.ShippingAddress = await _checkoutDataRepository.GetShippingAddressAsync(_order.ShippingAddress.Id);
             _order.BillingAddress  = await _checkoutDataRepository.GetBillingAddressAsync(_order.BillingAddress.Id);
             _order.PaymentMethod   = await _checkoutDataRepository.GetPaymentMethodAsync(_order.PaymentMethod.Id);
 
-            // Populate the CheckoutData items (Addresses & payment information)
             CheckoutDataViewModels = new ObservableCollection<CheckoutDataViewModel>
                 {
                     CreateCheckoutData(_order.ShippingAddress, Constants.ShippingAddress),
@@ -225,7 +209,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
             if (navigationMode == NavigationMode.Refresh)
             {
-                // Restore the selected CheckoutData manually
                 string selectedCheckoutData = RetrieveEntityStateValue<string>("selectedCheckoutData", viewModelState);
 
                 if (!string.IsNullOrWhiteSpace(selectedCheckoutData))
@@ -241,7 +224,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
             if (SelectedCheckoutData != null)
             {
-                // Store the selected CheckoutData manually
                 AddEntityStateValue("selectedCheckoutData", SelectedCheckoutData.EntityId, viewModelState);
             }
         }
@@ -306,7 +288,6 @@ namespace AdventureWorks.UILogic.ViewModels
             var selectedData = SelectedCheckoutData;
             if (selectedData == null) return;
 
-            // Add a new address/payment
             string addNewAddressType = selectedData.DataType == Constants.ShippingAddress ? "ShippingAddress"
                                     : selectedData.DataType == Constants.BillingAddress ? "BillingAddress" : "PaymentMethod";
 
@@ -318,10 +299,8 @@ namespace AdventureWorks.UILogic.ViewModels
             var selectedData = SelectedCheckoutData;
             if (selectedData == null) return;
             
-            // Hide the App Bar
             IsBottomAppBarOpened = false;
 
-            // Edit selected address/payment
             _navigationService.Navigate(selectedData.DataType, selectedData.EntityId);
         }
 
@@ -351,7 +330,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
             if (AllCheckoutDataViewModels != null)
             {
-                // Select the order's CheckoutData
                 SelectedAllCheckoutData = AllCheckoutDataViewModels.FirstOrDefault(c => c.EntityId == SelectedCheckoutData.EntityId);
             }
         }
@@ -372,7 +350,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
         private async void UpdateOrderCheckoutData(CheckoutDataViewModel checkouData)
         {
-            // Update order & CheckoutData collection items with the new info
             switch (checkouData.DataType)
             {
                 case Constants.ShippingAddress:

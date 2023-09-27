@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -12,9 +6,6 @@ using Windows.UI.Xaml.Data;
 
 namespace AdventureWorks.Shopper.Converters
 {
-    /// <summary>
-    /// Value converter that translates a boolean value to an invalid sign-in message.
-    /// </summary>
     public sealed class IsSignInInvalidConverter : IValueConverter
     {
         ResourceLoader resourceLoader = new ResourceLoader();

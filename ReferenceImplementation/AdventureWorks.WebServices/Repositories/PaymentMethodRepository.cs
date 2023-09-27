@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -42,7 +36,6 @@ namespace AdventureWorks.WebServices.Repositories
         {
             var paymentMethods = _paymentMethodsDictionary[userName];
             
-            //Clear old default payment methods
             var oldDefaults = paymentMethods.Where(a => a.IsDefault);
             foreach (var oldDefault in oldDefaults)
             {

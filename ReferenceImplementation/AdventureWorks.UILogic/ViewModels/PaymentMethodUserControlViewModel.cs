@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Collections.Generic;
@@ -44,7 +38,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
                 if (navigationMode == NavigationMode.Refresh)
                 {
-                    // Restore the errors collection manually
                     var errorsCollection = RetrieveEntityStateValue<IDictionary<string, ReadOnlyCollection<string>>>("errorsCollection", viewState);
 
                     if (errorsCollection != null)
@@ -61,7 +54,6 @@ namespace AdventureWorks.UILogic.ViewModels
                     var defaultPaymentMethod = await _checkoutDataRepository.GetDefaultPaymentMethodAsync();
                     if (defaultPaymentMethod != null)
                     {
-                        // Update the information and validate the values
                         PaymentMethod.CardNumber = defaultPaymentMethod.CardNumber;
                         PaymentMethod.CardVerificationCode = defaultPaymentMethod.CardVerificationCode;
                         PaymentMethod.CardholderName = defaultPaymentMethod.CardholderName;
@@ -79,7 +71,6 @@ namespace AdventureWorks.UILogic.ViewModels
         {
             base.OnNavigatedFrom(viewState, suspending);
 
-            // Store the errors collection manually
             if (viewState != null)
             {
                 AddEntityStateValue("errorsCollection", _paymentMethod.GetAllErrors(), viewState);
@@ -112,9 +103,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
         private static PaymentMethod FindMatchingPaymentMethod(PaymentMethod searchPaymentMethod, IEnumerable<PaymentMethod> paymentMethods)
         {
-            //This method is not comparing the Card Number since the Card Number value is being replaced with asterisks
-            //when persisted to the service. In a real production app using SSL, you would send/receive the actual card number
-            //securely.
             return paymentMethods.FirstOrDefault(paymentMethod =>
                 searchPaymentMethod.CardVerificationCode == paymentMethod.CardVerificationCode &&
                 searchPaymentMethod.CardholderName == paymentMethod.CardholderName &&

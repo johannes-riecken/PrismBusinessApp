@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -104,7 +98,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             var secondaryTileService = new MockSecondaryTileService() { ActivateTileNotificationsDelegate = (a, b, c) => Task.Delay(0) };
             var target = new ItemDetailPageViewModel(null, null, null, null, secondaryTileService, null);
 
-            // Case 1: Item not selected --> should not be fired
             secondaryTileService.SecondaryTileExistsDelegate = (a) => false;
             secondaryTileService.PinSquareSecondaryTileDelegate = (a, b, c) =>
                 {
@@ -120,14 +113,12 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             await target.PinProductCommand.Execute();
             Assert.IsFalse(fired);
 
-            // Case 2: Item selected but SecondaryTile exists --> should not be fired
             secondaryTileService.SecondaryTileExistsDelegate = (a) => true;
             target.SelectedProduct = new ProductViewModel(new Product() { ImageUri = new Uri("http://dummy-image-uri.com") });
             
             await target.PinProductCommand.Execute();
             Assert.IsFalse(fired);
 
-            // Case 3: Item selected and SecondaryTile does not exist --> should be fired
             secondaryTileService.SecondaryTileExistsDelegate = (a) => false;
 
             await target.PinProductCommand.Execute();
@@ -145,7 +136,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             var target = new ItemDetailPageViewModel(null, null, null, null, secondaryTileService, null);
             target.SelectedProduct = new ProductViewModel(new Product() { ImageUri = new Uri("http://dummy-image-uri.com") });
 
-            // The AppBar should be sticky when the item is being pinned
             secondaryTileService.PinSquareSecondaryTileDelegate = (a, b, c) =>
                 {
                     Assert.IsTrue(target.IsBottomAppBarSticky);
@@ -157,12 +147,10 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
                     return Task.FromResult(true);
                 };
 
-            // Check if the AppBar is Sticky before pinning
             Assert.IsFalse(target.IsBottomAppBarSticky);
 
             await target.PinProductCommand.Execute();
 
-            // Check if the AppBar is Sticky after pinning
             Assert.IsFalse(target.IsBottomAppBarSticky);
         }
 
@@ -194,7 +182,6 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             var secondaryTileService = new MockSecondaryTileService();
             var target = new ItemDetailPageViewModel(null, null, null, null, secondaryTileService, null);
 
-            // Case 1: Item not selected --> should not be fired
             secondaryTileService.SecondaryTileExistsDelegate = (a) => true;
             secondaryTileService.UnpinTileDelegate = (a) =>
             {
@@ -205,14 +192,12 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             await target.UnpinProductCommand.Execute();
             Assert.IsFalse(fired);
 
-            // Case 2: Item selected but SecondaryTile does not exist --> should not be fired
             secondaryTileService.SecondaryTileExistsDelegate = (a) => false;
             target.SelectedProduct = new ProductViewModel(new Product() { ImageUri = new Uri("http://dummy-image-uri.com") });
 
             await target.UnpinProductCommand.Execute();
             Assert.IsFalse(fired);
 
-            // Case 3: Item selected and SecondaryTile exists --> should be fired
             secondaryTileService.SecondaryTileExistsDelegate = (a) => true;
 
             await target.UnpinProductCommand.Execute();
@@ -226,19 +211,16 @@ namespace AdventureWorks.UILogic.Tests.ViewModels
             var target = new ItemDetailPageViewModel(null, null, null, null, tileService, null);
             target.SelectedProduct = new ProductViewModel(new Product() { ImageUri = new Uri("http://dummy-image-uri.com") });
 
-            // The AppBar should be sticky when the item is being unpinned
             tileService.UnpinTileDelegate = (a) =>
                 {
                     Assert.IsTrue(target.IsBottomAppBarSticky);
                     return Task.FromResult(true);
                 };
 
-            // Check if the AppBar is Sticky before unpinning
             Assert.IsFalse(target.IsBottomAppBarSticky);
 
             await target.UnpinProductCommand.Execute();
 
-            // Check if the AppBar is Sticky after unpinning
             Assert.IsFalse(target.IsBottomAppBarSticky);
         }
     }

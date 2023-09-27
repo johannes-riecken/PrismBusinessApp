@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -23,17 +17,14 @@ namespace AdventureWorks.WebServices.Controllers
 {
     public class IdentityController : ApiController
     {
-        // Credentials store
         private static readonly Dictionary<string, string> Identities = new Dictionary<string, string>
             {
                 {"JohnDoe", "pwd"},
                 {"user", "pwd"}
             };
 
-        // Recently sent password challenges, use cache for thread safety and time-based expiration
         private static MemoryCache ChallengeCache = new MemoryCache("Challenges");
 
-        // GET /api/Identity/GetPasswordChallenge?requestId={requestId}
         public string GetPasswordChallenge(string requestId)
         {
             if (requestId == null)
@@ -58,29 +49,23 @@ namespace AdventureWorks.WebServices.Controllers
             }
         }
 
-        // GET /api/Identity/id?requestId={requestId}&passwordHash={passwordHash}
         public UserInfo GetIsValid(string id, string requestId, string passwordHash)
         {
             byte[] challenge = null;
             if (requestId != null && ChallengeCache.Contains(requestId))
             {
-                // Retrieve the saved challenge bytes
                 challenge = (byte[])ChallengeCache[requestId];
-                // Delete saved challenge (each challenge is used just one time).
                 ChallengeCache.Remove(requestId);
             }
 
             lock (Identities)
             {
-                // Check that credentials are valid.
                 if (challenge != null && id != null && passwordHash != null && Identities.ContainsKey(id))
                 {
-                    // Compute hash for the previously issued challenge string using the password from the server's credentials store as the key.
                     var serverPassword = Encoding.UTF8.GetBytes(Identities[id]);
                     using (var provider = new HMACSHA512(serverPassword))
                     {
                         var serverHashBytes = provider.ComputeHash(challenge);
-                        // Authentication succeeds only if client and server have computed the same hash for the challenge string.
                         var clientHashBytes = DecodeFromHexString(passwordHash);
                         if (!serverHashBytes.SequenceEqual(clientHashBytes))
                             throw new HttpResponseException(HttpStatusCode.Unauthorized);
@@ -97,14 +82,12 @@ namespace AdventureWorks.WebServices.Controllers
             }
         }
 
-        // GET /api/Identity/GetIsValidSession
         [Authorize]
         public bool GetIsValidSession()
         {
             return true;
         }
 
-        // Output matches CryptographicBuffer.DecodeFromHexString in Windows Runtime.
         private static byte[] DecodeFromHexString(string hex)
         {
             var raw = new byte[hex.Length / 2];
@@ -115,7 +98,6 @@ namespace AdventureWorks.WebServices.Controllers
             return raw;
         }
 
-        // Output matches CryptographicBuffer.EncodeToHexString in Windows Runtime.
         private static string EncodeToHexString(byte[] hexBytes)
         {
             var sb = new StringBuilder(hexBytes.Length * 2);

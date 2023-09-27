@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Globalization;
@@ -28,7 +22,6 @@ namespace AdventureWorks.UILogic.Services
             using (var client = new HttpClient())
             {
 
-                // Ask the server for a password challenge string
                 var requestId = CryptographicBuffer.EncodeToHexString(CryptographicBuffer.GenerateRandom(4));
                 var challengeResponse = await client.GetAsync(new Uri(_clientBaseUrl + "GetPasswordChallenge?requestId=" + requestId));
                 challengeResponse.EnsureSuccessStatusCode();
@@ -36,20 +29,16 @@ namespace AdventureWorks.UILogic.Services
                 challengeEncoded = challengeEncoded.Replace(@"""", string.Empty);
                 var challengeBuffer = CryptographicBuffer.DecodeFromHexString(challengeEncoded);
 
-                // Use HMAC_SHA512 hash to encode the challenge string using the password being authenticated as the key.
                 var provider = MacAlgorithmProvider.OpenAlgorithm(MacAlgorithmNames.HmacSha512);
                 var passwordBuffer = CryptographicBuffer.ConvertStringToBinary(password, BinaryStringEncoding.Utf8);
                 var hmacKey = provider.CreateKey(passwordBuffer);
                 var buffHmac = CryptographicEngine.Sign(hmacKey, challengeBuffer);
                 var hmacString = CryptographicBuffer.EncodeToHexString(buffHmac);
 
-                // Send the encoded challenge to the server for authentication (to avoid sending the password itself)
                 var response = await client.GetAsync(new Uri(_clientBaseUrl + userId + "?requestID=" + requestId +"&passwordHash=" + hmacString));
 
-                // Raise exception if sign in failed
                 response.EnsureSuccessStatusCode();
 
-                // On success, return sign in results from the server response packet
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<UserInfo>(responseContent);
                 var serverUri = new Uri(Constants.ServerAddress);

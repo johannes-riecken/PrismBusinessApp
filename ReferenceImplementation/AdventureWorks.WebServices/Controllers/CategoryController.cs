@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -32,7 +26,6 @@ namespace AdventureWorks.WebServices.Controllers
             _productRepository = productRepository;
         }
 
-        // GET /api/Category?parentId={parentId}&maxAmmountOfProducts={maxAmountOfProducts}
         public IEnumerable<Category> GetCategories(int parentId, int maxAmountOfProducts)
         {
             var categories = _categoryRepository.GetAll().Where(c => c.ParentId == parentId);
@@ -54,7 +47,6 @@ namespace AdventureWorks.WebServices.Controllers
         }
 
 
-        // GET /api/Category/id
         public Category GetCategory(int id)
         {
             var item = _categoryRepository.GetItem(id);
@@ -93,7 +85,6 @@ namespace AdventureWorks.WebServices.Controllers
                 }
                 else
                 {
-                    //Today's Deals Category
                     category.Products = _productRepository.GetTodaysDealsProducts();
                     category.TotalNumberOfItems = _productRepository.GetTodaysDealsProducts().Count();
                 }

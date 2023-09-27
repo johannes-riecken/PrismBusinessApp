@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Collections.Generic;
@@ -14,7 +8,6 @@ using Microsoft.Practices.Prism.StoreApps;
 
 namespace AdventureWorks.UILogic.Models
 {
-    // Documentation on validating user input is at http://go.microsoft.com/fwlink/?LinkID=288817&clcid=0x409
 
     public class Address : ValidatableBindableBase
     {
@@ -29,16 +22,11 @@ namespace AdventureWorks.UILogic.Models
         private string _zipCode;
         private string _phone;
 
-        // Regex rules for the fields.
-        // Notice that you might need more complex rules in your app.
         
-        // We allow all Unicode letter characters as well as internal spaces and hypens, as long as these do not occur in sequences.
         private const string NAMES_REGEX_PATTERN = @"\A\p{L}+([\p{Zs}\-][\p{L}]+)*\z";
 
-        // We allow all Unicode letter and numeric characters as well as internal spaces, as long as these do not occur in sequences.
         private const string ADDRESS_REGEX_PATTERN = @"\A[\p{L}\p{N}]+([\p{Zs}][\p{L}\p{N}]+)*\z";
 
-        // We allow all Unicode umeric characters and hypens, as long as these do not occur in sequences.
         private const string NUMBERS_REGEX_PATTERN = @"\A\p{N}+([\p{N}\-][\p{N}]+)*\z";
 
         public string Id

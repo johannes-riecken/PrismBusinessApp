@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Collections.Generic;
@@ -61,14 +55,11 @@ namespace AdventureWorks.UILogic.ViewModels
             {
                 if (SetProperty(ref _selectedProduct, value) && value != null)
                 {
-                    // Check if the product is pinned
                     IsSelectedProductPinned = _secondaryTileService.SecondaryTileExists(_selectedProduct.ProductNumber);
                 }
             }
         }
 
-        //Use the ViewModel to store the SelectedIndex of the FlipView so that the value can be set
-        //back into the FlipView control after the items are set.
         [RestorableState]
         public int SelectedIndex
         {
@@ -105,9 +96,6 @@ namespace AdventureWorks.UILogic.ViewModels
             get { return _isBottomAppBarOpened; }
             set
             {
-                // We always fire the PropertyChanged event because the 
-                // AppBar.IsOpen property doesn't notify when the property is set.
-                // See http://go.microsoft.com/fwlink/?LinkID=288840
                 _isBottomAppBarOpened = value;
                 OnPropertyChanged("IsBottomAppBarOpened");
             }
@@ -170,18 +158,15 @@ namespace AdventureWorks.UILogic.ViewModels
             {
                 IsBottomAppBarSticky = true;
 
-                // Documentation on working with tiles can be found at http://go.microsoft.com/fwlink/?LinkID=288821&clcid=0x409
                 isPinned = await _secondaryTileService.PinWideSecondaryTile(tileId, SelectedProduct.Title, SelectedProduct.ProductNumber);
                 IsSelectedProductPinned = isPinned;
 
                 IsBottomAppBarSticky = false;
 
-                // Hide the App Bar
                 IsBottomAppBarOpened = false;
 
                 if (IsSelectedProductPinned)
                 {
-                    // Activate Secondary Live Tile funtionality
                     var tileContentUri = new Uri(Constants.ServerAddress + "/api/TileNotification/" + tileId);
                     _secondaryTileService.ActivateTileNotifications(tileId, tileContentUri, PeriodicUpdateRecurrence.HalfHour);
                 }

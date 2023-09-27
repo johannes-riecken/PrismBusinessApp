@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.ComponentModel;
@@ -13,13 +7,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using AdventureWorks.Shopper.Common;
 
-// The Grouped Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234231
 
 namespace AdventureWorks.Shopper.Views
 {
-    /// <summary>
-    /// A page that displays a grouped collection of items.
-    /// </summary>
     public sealed partial class CategoryPage : VisualStateAwarePage
     {
         private double _virtualizingStackPanelHorizontalOffset;
@@ -65,14 +55,12 @@ namespace AdventureWorks.Shopper.Views
         {
             var virtualizingStackPanel = (VirtualizingStackPanel)sender;
 
-            // Find the ScrollViewer inside the GridView
             var scrollViewer = VisualTreeUtilities.GetVisualChild<ScrollViewer>(itemsGridView);
 
             if (scrollViewer != null)
             {
                 if (scrollViewer.ComputedHorizontalScrollBarVisibility == Visibility.Visible)
                 {
-                    // Update the Horizontal offset
                     virtualizingStackPanel.SetHorizontalOffset(_virtualizingStackPanelHorizontalOffset);
                     scrollViewer.ChangeView(_scrollViewerHorizontalOffset, null, null);
                 }
@@ -93,7 +81,6 @@ namespace AdventureWorks.Shopper.Views
             
             if (((Visibility)e.NewValue) == Visibility.Visible)
             {
-                // Update the Horizontal offset
                 virtualizingStackPanel.SetHorizontalOffset(_virtualizingStackPanelHorizontalOffset);
                 scrollViewer.ChangeView(_scrollViewerHorizontalOffset, null, null);
                 helper.PropertyChanged -= ScrollBarHorizontalVisibilityChanged;

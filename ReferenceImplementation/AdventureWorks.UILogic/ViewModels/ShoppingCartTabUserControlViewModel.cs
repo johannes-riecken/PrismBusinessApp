@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -37,12 +31,10 @@ namespace AdventureWorks.UILogic.ViewModels
 
             if (eventAggregator != null)
             {
-                // Documentation on loosely coupled communication is at http://go.microsoft.com/fwlink/?LinkID=288820&clcid=0x409
                 eventAggregator.GetEvent<ShoppingCartUpdatedEvent>().Subscribe(UpdateItemCountAsync);
                 eventAggregator.GetEvent<ShoppingCartItemUpdatedEvent>().Subscribe(UpdateItemCountAsync);
             }
 
-            //Start process of updating item count.
             UpdateItemCountAsync(null);
         }
 
@@ -53,7 +45,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
             try
             {
-                // Trigger auto-login if credentials are saved.
                 await _accountService.VerifyUserAuthenticationAsync();
                 shoppingCart = await _shoppingCartRepository.GetShoppingCartAsync();
             }

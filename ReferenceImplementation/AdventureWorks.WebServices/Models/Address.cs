@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -17,16 +11,11 @@ namespace AdventureWorks.WebServices.Models
 {
     public class Address
     {
-        // Regex rules for the fields.
-        // Notice that you might need more complex rules in your app.
 
-        // We allow all Unicode letter characters as well as internal spaces and hypens, as long as these do not occur in sequences.
         private const string NAMES_REGEX_PATTERN = @"\A\p{L}+([\p{Zs}\-][\p{L}]+)*\z";
 
-        // We allow all Unicode letter and numeric characters as well as internal spaces, as long as these do not occur in sequences.
         private const string ADDRESS_REGEX_PATTERN = @"\A[\p{L}\p{N}]+([\p{Zs}][\p{L}\p{N}]+)*\z";
 
-        // We allow all Unicode umeric characters and hypens, as long as these do not occur in sequences.
         private const string NUMBERS_REGEX_PATTERN = @"\A\p{N}+([\p{N}\-][\p{N}]+)*\z";
 
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "ErrorRequired")]
@@ -98,7 +87,6 @@ namespace AdventureWorks.WebServices.Models
 
                 foreach (var range in state.ValidZipCodeRanges)
                 {
-                    // If the first 3 digits of the Zip Code falls within the given range, it is valid.
                     int minValue = Convert.ToInt32(range.Split('-')[0], CultureInfo.InvariantCulture);
                     int maxValue = Convert.ToInt32(range.Split('-')[1], CultureInfo.InvariantCulture);
 

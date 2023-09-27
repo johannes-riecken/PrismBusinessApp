@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +5,6 @@ using Microsoft.Practices.Prism.StoreApps;
 
 namespace ValidationQuickStart.Models
 {
-    //This QuickStart is documented at http://go.microsoft.com/fwlink/?LinkID=288827&clcid=0x409
 
     public class UserInfo : ValidatableBindableBase
     {
@@ -19,7 +12,6 @@ namespace ValidationQuickStart.Models
         private string _middleName;
         private string _lastName;
 
-        // We allow all Unicode letter characters as well as internal spaces and hypens, as long as these do not occur in sequences
         private const string RegexPattern = @"\A\p{L}+([\p{Zs}\-][\p{L}]+)*\z";
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesHelper), ErrorMessageResourceName = "FirstNameRequired")]

@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -58,9 +52,6 @@ namespace AdventureWorks.UILogic.ViewModels
         {
             _accountService.SignOut();
             _navigationService.ClearHistory();
-            //Navigate to Hub page with time stamp to ensure a navigation even if user is currently on Hub page.
-            //If user is currently on Hub page and navigation is attempted with same navigation parameter, 
-            //nothing will be added to the navigation stack.
             _navigationService.Navigate("Hub", DateTime.Now);
             CloseFlyout();
         }

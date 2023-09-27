@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Collections.Generic;
@@ -16,7 +10,6 @@ namespace AdventureWorks.Shopper.Controls
 {
     public class AutoRotatingGridView : GridView
     {
-        // Default styles
         protected static readonly string defaultLandscapeItemsPanelTemplate =
             "<ItemsPanelTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'><ItemsWrapGrid Orientation='Vertical' /></ItemsPanelTemplate>";
 
@@ -24,7 +17,6 @@ namespace AdventureWorks.Shopper.Controls
             "<ItemsPanelTemplate  xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'><ItemsWrapGrid Orientation='Horizontal' /></ItemsPanelTemplate>";
 
 
-        // Dependency Properties for portrait layout
         public static readonly DependencyProperty PortraitItemTemplateProperty =
             DependencyProperty.Register("PortraitItemTemplate", typeof(DataTemplate), typeof(AutoRotatingGridView), new PropertyMetadata(null));
 
@@ -35,7 +27,6 @@ namespace AdventureWorks.Shopper.Controls
             DependencyProperty.Register("PortraitGroupStyle", typeof(ObservableCollection<GroupStyle>), typeof(AutoRotatingGridView), new PropertyMetadata(null));
 
 
-        // Dependency Properties for minimum layout
         public static readonly DependencyProperty MinimalItemTemplateProperty =
             DependencyProperty.Register("MinimalItemTemplate", typeof(DataTemplate), typeof(AutoRotatingGridView), new PropertyMetadata(null));
 
@@ -50,7 +41,6 @@ namespace AdventureWorks.Shopper.Controls
             DependencyProperty.Register("MinimalLayoutWidth", typeof(int), typeof(AutoRotatingGridView), new PropertyMetadata(500));
 
 
-        // Private members
         private DataTemplate landscapeItemTemplate = null;
         private ItemsPanelTemplate landscapeItemsPanel = null;
         private IList<GroupStyle> landscapeGroupStyle = null;
@@ -61,7 +51,6 @@ namespace AdventureWorks.Shopper.Controls
         {
             this.SizeChanged += RotatingGridview_SizeChanged;
 
-            // These styles will be overriden by the custom ones
             this.ItemsPanel = XamlReader.Load(defaultLandscapeItemsPanelTemplate) as ItemsPanelTemplate;
             this.PortraitItemsPanel = XamlReader.Load(defaultPortraitItemsPanelTemplate) as ItemsPanelTemplate;
 
@@ -71,7 +60,6 @@ namespace AdventureWorks.Shopper.Controls
             UpdateLayout(AutoRotateGridViewLayouts.Landscape);
         }
 
-        // Properties
         public DataTemplate PortraitItemTemplate
         {
             get { return (DataTemplate)GetValue(PortraitItemTemplateProperty); }
@@ -114,10 +102,8 @@ namespace AdventureWorks.Shopper.Controls
             set { SetValue(MinimalLayoutWidthProperty, value); }
         }
 
-        // Methods and handlers
         void RotatingGridview_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            // We save the landscape styles as these properties will be changed later
             if (this.landscapeItemTemplate == null)
                 this.landscapeItemTemplate = this.ItemTemplate;
 
@@ -131,7 +117,6 @@ namespace AdventureWorks.Shopper.Controls
                     this.landscapeGroupStyle.Add(style);
             }
 
-            // We search for the corresponding layout and update it if it changed
             if (this.MinimalLayoutWidth > Window.Current.Bounds.Width)
             {
                 if (this.previousState != AutoRotateGridViewLayouts.Minimal)
@@ -160,7 +145,6 @@ namespace AdventureWorks.Shopper.Controls
 
         private void UpdateLayout(AutoRotateGridViewLayouts layout)
         {
-            // Landscape layout
             if (layout == AutoRotateGridViewLayouts.Landscape)
             {
                 this.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Auto);
@@ -183,7 +167,6 @@ namespace AdventureWorks.Shopper.Controls
             this.ChangeItemTemplate(layout);
         }
 
-        // Styles setter methods with fallback
         private void ChangeItemTemplate(AutoRotateGridViewLayouts layout)
         {
             switch (layout)
@@ -269,7 +252,6 @@ namespace AdventureWorks.Shopper.Controls
             }
         }
 
-        // Layouts
         enum AutoRotateGridViewLayouts
         {
             Landscape,

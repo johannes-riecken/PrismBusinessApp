@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -16,7 +10,6 @@ using AdventureWorks.UILogic.Services;
 
 namespace AdventureWorks.UILogic.Repositories
 {
-    // Documentation on managing application data is at http://go.microsoft.com/fwlink/?LinkID=288818&clcid=0x409
 
     public class ProductCatalogRepository : IProductCatalogRepository
     {
@@ -50,16 +43,13 @@ namespace AdventureWorks.UILogic.Repositories
 
             try
             {
-                // Case 1: Retrieve the items from the cache
                 return await _cacheService.GetDataAsync<ReadOnlyCollection<Category>>(cacheFileName);
             }
             catch (FileNotFoundException)
             { }
 
-            // Retrieve the items from the service
             var categories = await _productCatalogService.GetCategoriesAsync(parentId, maxAmountOfProducts);
 
-            // Save the items in the cache
             await _cacheService.SaveDataAsync(cacheFileName, categories);
 
             return categories;
@@ -67,7 +57,6 @@ namespace AdventureWorks.UILogic.Repositories
 
         public async Task<SearchResult> GetFilteredProductsAsync(string productsQueryString)
         {
-            // Retrieve the items from the service
             var searchResult = await _productCatalogService.GetFilteredProductsAsync(productsQueryString);
             return searchResult;
         }
@@ -80,14 +69,12 @@ namespace AdventureWorks.UILogic.Repositories
 
             try
             {
-                // Retrieve the items from the cache
                 return await _cacheService.GetDataAsync<ReadOnlyCollection<Product>>(cacheFileName);
             }
             catch (FileNotFoundException)
             {
             }
 
-            // Retrieve the items from the service
             var products = await _productCatalogService.GetProductsAsync(categoryId);
 
             await _cacheService.SaveDataAsync(cacheFileName, products);
@@ -102,17 +89,14 @@ namespace AdventureWorks.UILogic.Repositories
 
             try
             {
-                // Retrieve the items from the cache
                 return await _cacheService.GetDataAsync<Category>(cacheFileName);
             }
             catch (FileNotFoundException)
             {
             }
 
-            // Retrieve the items from the service
             var category = await _productCatalogService.GetCategoryAsync(categoryId);
 
-            // Save the items in the cache
             await _cacheService.SaveDataAsync(cacheFileName, category);
 
             return category;
@@ -124,17 +108,14 @@ namespace AdventureWorks.UILogic.Repositories
 
             try
             {
-                // Retrieve the items from the cache
                 return await _cacheService.GetDataAsync<Product>(cacheFileName);
             }
             catch (FileNotFoundException)
             {
 
             }
-            // Retrieve the items from the service
             var product = await _productCatalogService.GetProductAsync(productNumber);
 
-            // Save the items in the cache
             await _cacheService.SaveDataAsync(cacheFileName, product);
 
             return product;

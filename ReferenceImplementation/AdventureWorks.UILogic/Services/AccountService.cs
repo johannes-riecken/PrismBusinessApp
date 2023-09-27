@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -53,15 +47,10 @@ namespace AdventureWorks.UILogic.Services
 
         public UserInfo SignedInUser { get { return _signedInUser; } }
 
-        /// <summary>
-        /// Gets the current active user signed in the app.
-        /// </summary>
-        /// <returns>A Task that, when complete, retrieves an active user that is ready to be used for any operation against the service.</returns>
         public async Task<UserInfo> VerifyUserAuthenticationAsync()
         {
             try
             {
-                // If user is logged in, verify that the session in the service is still active
                 if (_signedInUser != null && await _identityService.VerifyActiveSessionAsync(_signedInUser.UserName))
                 {
                     return _signedInUser;
@@ -69,11 +58,8 @@ namespace AdventureWorks.UILogic.Services
             }
             catch (SecurityException)
             {
-                // User's session has expired.
             }
 
-            // Attempt to sign in using credentials stored in session state
-            // If succeeds, ask for a new active session
             if (_userName != null && _password != null)
             {
                 if (await SignInUserAsync(_userName, _password, false))
@@ -87,8 +73,6 @@ namespace AdventureWorks.UILogic.Services
 
         public async Task<UserInfo> VerifySavedCredentialsAsync()
         {
-            // Attempt to sign in using credentials stored locally
-            // If succeeds, ask for a new active session
             var savedCredentials = _credentialStore.GetSavedCredentials(PasswordVaultResourceName);
             if (savedCredentials != null)
             {
@@ -108,10 +92,8 @@ namespace AdventureWorks.UILogic.Services
             UserInfo previousUser = _signedInUser;
             _signedInUser = result.UserInfo;
 
-            // Save SignedInUser in the StateService
             _sessionStateService.SessionState[SignedInUserKey] = _signedInUser;
 
-            // Save username and password in state service
             _userName = userName;
             _password = password;
             _sessionStateService.SessionState[UserNameKey] = userName;
@@ -119,20 +101,16 @@ namespace AdventureWorks.UILogic.Services
 
             if (useCredentialStore)
             {
-                // Save credentials in the CredentialStore
                 _credentialStore.SaveCredentials(PasswordVaultResourceName, userName, password);
 
-                // Documentation on managing application data is at http://go.microsoft.com/fwlink/?LinkID=288818&clcid=0x409
             }
 
             if (previousUser == null)
             {
-                //Raise use changed event if user logged in
                 RaiseUserChanged(_signedInUser, previousUser);
             }
             else if (_signedInUser != null && _signedInUser.UserName != previousUser.UserName)
             {   
-                //Raise use changed event if user changed
                 RaiseUserChanged(_signedInUser, previousUser);
             }
             return true;
@@ -160,10 +138,8 @@ namespace AdventureWorks.UILogic.Services
             _sessionStateService.SessionState.Remove(UserNameKey);
             _sessionStateService.SessionState.Remove(PasswordKey);
 
-            // remove user from the CredentialStore, if any
             _credentialStore.RemoveSavedCredentials(PasswordVaultResourceName);
 
-            //TODO: remove cookie?
 
             RaiseUserChanged(_signedInUser, previousUser);
         }

@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -28,14 +22,7 @@ namespace AdventureWorks.UILogic.Services
                 {
                     orderClient.DefaultRequestHeaders.Add("Accept", "application/json");
 
-                    // In order to meet the Windows 8 app certification requirements, 
-                    // you cannot send Credit Card information to a Service in the clear.                    
-                    // The payment processing must meet the current PCI Data Security Standard (PCI DSS).
-                    // See http://go.microsoft.com/fwlink/?LinkID=288837
-                    // and http://go.microsoft.com/fwlink/?LinkID=288839
-                    // for more information.
 
-                    // Replace sensitive information with dummy values
                     var orderToSend = new Order()
                         {
                             UserId = order.UserId,
@@ -70,14 +57,7 @@ namespace AdventureWorks.UILogic.Services
                 {
                     orderClient.DefaultRequestHeaders.Add("Accept", "application/json");
 
-                    // In order to meet the Windows 8 app certification requirements, 
-                    // you cannot send Credit Card information to a Service in the clear.                    
-                    // The payment processing must meet the current PCI Data Security Standard (PCI DSS).
-                    // See http://go.microsoft.com/fwlink/?LinkID=288837
-                    // and http://go.microsoft.com/fwlink/?LinkID=288839
-                    // for more information.
 
-                    // Replace sensitive information with dummy values
                     var orderToSend = new Order()
                     {
                         Id = order.Id,

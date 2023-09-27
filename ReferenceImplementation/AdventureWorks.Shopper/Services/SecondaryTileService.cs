@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using AdventureWorks.UILogic.Services;
@@ -14,7 +8,6 @@ using Windows.UI.StartScreen;
 
 namespace AdventureWorks.Shopper.Services
 {
-    // Documentation on working with tiles can be found at http://go.microsoft.com/fwlink/?LinkID=288821&clcid=0x409
     public class SecondaryTileService : ISecondaryTileService
     {
         private Uri _squareLogoUri = new Uri("ms-appx:///Assets/Logo.png");

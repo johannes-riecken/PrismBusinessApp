@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -81,7 +75,6 @@ namespace Microsoft.Practices.Prism.StoreApps.Tests
                     viewModelNavigatedToCalled = true;
                 };
 
-                // Set up the viewModel to the Page we navigated
                 frame.Navigated += (sender, e) =>
                 {
                     var view = frame.Content as FrameworkElement;
@@ -119,15 +112,12 @@ namespace Microsoft.Practices.Prism.StoreApps.Tests
 
                 var navigationService = new FrameNavigationService(frame, (pageToken) => typeof(MockPage), sessionStateService);
 
-                // Initial navigatio
                 navigationService.Navigate("page0", 0);
 
-                // Set up the frame's content with a Page
                 var view = new MockPage();
                 view.DataContext = viewModel;
                 frame.Content = view;
 
-                // Navigate to fire the NavigatedToCurrentViewModel
                 navigationService.Navigate("page1", 1);
 
                 Assert.IsTrue(viewModelNavigatedFromCalled);

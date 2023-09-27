@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Globalization;
@@ -30,16 +24,10 @@ using Windows.UI.ApplicationSettings;
 
 namespace AdventureWorks.Shopper
 {
-    /// <summary>
-    /// This class uses the MvvmAppBase class to bootstrap this Windows Store App with Mvvm support
-    /// http://go.microsoft.com/fwlink/?LinkID=288809&clcid=0x409
-    /// </summary>
     sealed partial class App : MvvmAppBase
     {
-        // Create the singleton container that will be used for type resolution in the app
         private readonly IUnityContainer _container = new UnityContainer();
 
-        //Bootstrap: App singleton service declarations
         private IEventAggregator _eventAggregator;
         private TileUpdater _tileUpdater;
 
@@ -49,23 +37,18 @@ namespace AdventureWorks.Shopper
             this.RequestedTheme = ApplicationTheme.Dark;
         }
 
-        // Documentation on navigation between pages is at http://go.microsoft.com/fwlink/?LinkID=288815&clcid=0x409
         protected override void OnLaunchApplication(LaunchActivatedEventArgs args)
         {
             if (args != null && !string.IsNullOrEmpty(args.Arguments))
             {
-                // The app was launched from a Secondary Tile
-                // Navigate to the item's page
                 NavigationService.Navigate("ItemDetail", args.Arguments);
             }
             else
             {
-                // Navigate to the initial page
                 NavigationService.Navigate("Hub", null);
             }
         }
 
-        // Documentation on using search can be found at http://go.microsoft.com/fwlink/?LinkID=288822&clcid=0x409
         protected override void OnSearchApplication(SearchQueryArguments args)
         {
             if (args != null && !string.IsNullOrEmpty(args.QueryText))
@@ -80,7 +63,6 @@ namespace AdventureWorks.Shopper
 
         protected override void OnRegisterKnownTypesForSerialization()
         {
-            // Set up the list of known types for the SuspensionManager
             SessionStateService.RegisterKnownType(typeof(Address));
             SessionStateService.RegisterKnownType(typeof(PaymentMethod));
             SessionStateService.RegisterKnownType(typeof(UserInfo));
@@ -109,13 +91,11 @@ namespace AdventureWorks.Shopper
             _container.RegisterType<IAlertMessageService, AlertMessageService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ISearchPaneService, SearchPaneService>(new ContainerControlledLifetimeManager());
 
-            // Register repositories
             _container.RegisterType<IProductCatalogRepository, ProductCatalogRepository>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IShoppingCartRepository, ShoppingCartRepository>(new ContainerControlledLifetimeManager());
             _container.RegisterType<ICheckoutDataRepository, CheckoutDataRepository>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IOrderRepository, OrderRepository>(new ContainerControlledLifetimeManager());
 
-            // Register web service proxies
             _container.RegisterType<IProductCatalogService, ProductCatalogServiceProxy>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IOrderService, OrderServiceProxy>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IShoppingCartService, ShoppingCartServiceProxy>(new ContainerControlledLifetimeManager());
@@ -125,7 +105,6 @@ namespace AdventureWorks.Shopper
             _container.RegisterType<IAddressService, AddressServiceProxy>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IPaymentMethodService, PaymentMethodServiceProxy>(new ContainerControlledLifetimeManager());
 
-            // Register child view models
             _container.RegisterType<IShippingAddressUserControlViewModel, ShippingAddressUserControlViewModel>();
             _container.RegisterType<IBillingAddressUserControlViewModel, BillingAddressUserControlViewModel>();
             _container.RegisterType<IPaymentMethodUserControlViewModel, PaymentMethodUserControlViewModel>();
@@ -138,7 +117,6 @@ namespace AdventureWorks.Shopper
                     return viewModelType;
                 });
 
-            // Documentation on working with tiles can be found at http://go.microsoft.com/fwlink/?LinkID=288821&clcid=0x409
             _tileUpdater = TileUpdateManager.CreateTileUpdaterForApplication();
             _tileUpdater.StartPeriodicUpdate(new Uri(Constants.ServerAddress + "/api/TileNotification"), PeriodicUpdateRecurrence.HalfHour);
 
@@ -148,8 +126,6 @@ namespace AdventureWorks.Shopper
 
         protected override object Resolve(Type type)
         {
-            // Use the container to resolve types (e.g. ViewModels and Flyouts)
-            // so their dependencies get injected
             return _container.Resolve(type);
         }
 

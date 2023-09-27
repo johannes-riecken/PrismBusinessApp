@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -34,7 +28,6 @@ namespace AdventureWorks.WebServices.Controllers
             _orderRepository = orderRepository;
         }
 
-        // GET /api/order/id
         [HttpGet]
         public Order GetOrder(int id)
         {
@@ -48,7 +41,6 @@ namespace AdventureWorks.WebServices.Controllers
             return order;
         }
 
-        // POST /api/order/create
         [HttpPost]
         public HttpResponseMessage CreateOrder(Order order)
         {
@@ -70,7 +62,6 @@ namespace AdventureWorks.WebServices.Controllers
             }
         }
 
-        // PUT /api/order/process 
         [HttpPut]
         public HttpResponseMessage ProcessOrder(int id, Order order)
         {
@@ -81,8 +72,6 @@ namespace AdventureWorks.WebServices.Controllers
 
             if (ModelState.IsValid)
             {
-                // This is where you would add custom business logic validation (check stock, approve transaction, etc)
-                // for instance, validate the transaction before performing the purchase
 
                 if (order.ShoppingCart.ShoppingCartItems.Count < 1)
                 {
@@ -93,7 +82,6 @@ namespace AdventureWorks.WebServices.Controllers
                 var result = order.PaymentMethod.CardNumber != "22222" ? "APPROVED" : string.Format(CultureInfo.CurrentCulture, "Invalid Payment Method. Reason: {0}", "DECLINED_CONTACT_YOUR_BANK");
                 if (result == "APPROVED")
                 {
-                    // This is where you would process the order. It is omitted for simplicity of the back end service.
                     _orderRepository.Delete(order.Id);
                     return Request.CreateResponse();
                 }
@@ -103,14 +91,9 @@ namespace AdventureWorks.WebServices.Controllers
                 }
             }
 
-            // Only get here if there are ModelState errors
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
-        /// <summary>
-        /// Used for testing
-        /// </summary>
-        /// <param name="resetData">Flag to differentiate the posts by query string parameter</param>
         [HttpPost]
         [AllowAnonymous]
         public void Reset(bool resetData)

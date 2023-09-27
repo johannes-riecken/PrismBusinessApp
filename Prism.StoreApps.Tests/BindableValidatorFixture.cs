@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -58,7 +52,6 @@ namespace Microsoft.Practices.Prism.StoreApps.Tests
         [TestMethod]
         public void Validation_Of_Fields_When_Invalid_Should_Fail()
         {
-            // Test model with invalid title
             var modelWithInvalidTitle = new MockModelWithValidation()
             {
                 Title = string.Empty,
@@ -70,7 +63,6 @@ namespace Microsoft.Practices.Prism.StoreApps.Tests
             Assert.IsFalse(resultWithInvalidTitle);
             Assert.IsFalse(targetWithInvalidTitle.GetAllErrors().Values.Count == 0);
 
-            // Test model with invalid description
             var modelWithInvalidDescription = new MockModelWithValidation()
             {
                 Title = "A valid Title",
@@ -82,7 +74,6 @@ namespace Microsoft.Practices.Prism.StoreApps.Tests
             Assert.IsFalse(resultWithInvalidDescription);
             Assert.IsFalse(targetWithInvalidDescription.GetAllErrors().Values.Count == 0);
 
-            // Test model with invalid title + description
             var modelInvalid = new MockModelWithValidation()
             {
                 Title = "1234567894",

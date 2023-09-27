@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -55,7 +49,6 @@ namespace AdventureWorks.UILogic.ViewModels
             IncrementCountCommand = DelegateCommand.FromAsyncHandler(IncrementCount);
             DecrementCountCommand = DelegateCommand.FromAsyncHandler(DecrementCount, CanDecrementCount);
 
-            // Subscribe to the ShoppingCartUpdated event
             if (eventAggregator != null)
             {
                 eventAggregator.GetEvent<ShoppingCartUpdatedEvent>().Subscribe(UpdateShoppingCartAsync);
@@ -102,7 +95,6 @@ namespace AdventureWorks.UILogic.ViewModels
                     
                     if (_selectedItem != null)
                     {
-                        // Display the AppBar 
                         IsBottomAppBarOpened = true;
 
                         IncrementCountCommand.RaiseCanExecuteChanged();
@@ -135,9 +127,6 @@ namespace AdventureWorks.UILogic.ViewModels
             get { return _isBottomAppBarOpened; }
             set
             {
-                // We always fire the PropertyChanged event because the 
-                // AppBar.IsOpen property doesn't notify when the property is set.
-                // See http://go.microsoft.com/fwlink/?LinkID=288840
                 _isBottomAppBarOpened = value;
                 OnPropertyChanged("IsBottomAppBarOpened");
             }
@@ -242,10 +231,8 @@ namespace AdventureWorks.UILogic.ViewModels
 
         private async Task GoToNextPageAsync()
         {
-            // Set up navigate action depending on the application's state
             var navigateAction = await ResolveNavigationActionAsync();
 
-            // Execute the navigate action
             navigateAction();
         }
 
@@ -254,19 +241,16 @@ namespace AdventureWorks.UILogic.ViewModels
             Action navigateAction = null;
             var navigationServiceReference = _navigationService;
 
-            // Retrieve the default information for the Order
             var defaultShippingAddress = await _checkoutDataRepository.GetDefaultShippingAddressAsync();
             var defaultBillingAddress = await _checkoutDataRepository.GetDefaultBillingAddressAsync();
             var defaultPaymentMethod = await _checkoutDataRepository.GetDefaultPaymentMethodAsync();
 
             if (defaultShippingAddress == null || defaultBillingAddress == null || defaultPaymentMethod == null)
             {
-                // Navigate to the CheckoutHubPage to fill the missing default information
                 navigateAction = () => navigationServiceReference.Navigate("CheckoutHub", null);
             }
             else
             {
-                // Create the Order with the current information. Then navigate to the CheckoutSummaryPage
                 var shoppingCartReference = _shoppingCart;
                 var orderRepositoryReference = _orderRepository;
                 var accountServiceReference = _accountService;
@@ -292,7 +276,6 @@ namespace AdventureWorks.UILogic.ViewModels
             string errorMessage = string.Empty;
             try
             {
-                // Hide the AppBar
                 IsBottomAppBarOpened = false;
 
                 await _shoppingCartRepository.RemoveShoppingCartItemAsync(item.Id);

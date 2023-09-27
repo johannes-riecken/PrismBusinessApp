@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -68,7 +62,6 @@ namespace AdventureWorks.UILogic.ViewModels
                 SetProperty(ref _useSameAddressAsShipping, value);
                 if (_useSameAddressAsShipping)
                 {
-                    // Clean the Billing Address values & errors
                     BillingAddressViewModel.Address = new Address { Id = Guid.NewGuid().ToString() };
                 }
 
@@ -101,18 +94,10 @@ namespace AdventureWorks.UILogic.ViewModels
         {
             if (viewModelState == null) return;
 
-            // Try to populate address and payment method controls with default data if available
             ShippingAddressViewModel.SetLoadDefault(true);
             BillingAddressViewModel.SetLoadDefault(true);
             PaymentMethodViewModel.SetLoadDefault(true);
 
-            // This ViewModel is an example of composition. The CheckoutHubPageViewModel manages
-            // three child view models (Shipping Address, Billing Address, and Payment Method).
-            // Since the FrameNavigationService calls this OnNavigatedTo method, passing in
-            // a viewModelState dictionary, it is the responsibility of the parent view model
-            // to manage separate dictionaries for each of its children. If the parent view model
-            // were to pass its viewModelState dictionary to each of its children, it would be very
-            // easy for one child view model to write over a sibling view model's state.
             if (navigationMode == NavigationMode.New)
             {
                 viewModelState["ShippingViewModel"] = new Dictionary<string, object>();
@@ -149,7 +134,6 @@ namespace AdventureWorks.UILogic.ViewModels
             {
                 if (await _accountService.VerifyUserAuthenticationAsync() == null)
                 {
-                    //Show sign in modal dialog? _flyoutService.ShowFlyout("SignIn", null, async () => await ProcessFormAsync());
                 }
                 else
                 {
@@ -195,7 +179,6 @@ namespace AdventureWorks.UILogic.ViewModels
             }
             catch (ModelValidationException)
             {
-                // Handle validation exceptions when the order is created.
             }
 
             var user = _accountService.SignedInUser;
@@ -203,7 +186,6 @@ namespace AdventureWorks.UILogic.ViewModels
 
             try
             {
-                // Create an order with the values entered in the form
                 await _orderRepository.CreateBasicOrderAsync(user.UserName, shoppingCart, ShippingAddressViewModel.Address,
                                                                             BillingAddressViewModel.Address,
                                                                             PaymentMethodViewModel.PaymentMethod);
@@ -225,7 +207,6 @@ namespace AdventureWorks.UILogic.ViewModels
             var billingAddressErrors = new Dictionary<string, ReadOnlyCollection<string>>();
             var paymentMethodErrors = new Dictionary<string, ReadOnlyCollection<string>>();
 
-            // Property keys of the form. Format: order.{ShippingAddress/BillingAddress/PaymentMethod}.{Property}
             foreach (var propkey in validationResult.ModelState.Keys)
             {
                 string orderPropAndEntityProp = propkey.Substring(propkey.IndexOf('.') + 1); // strip off order. prefix

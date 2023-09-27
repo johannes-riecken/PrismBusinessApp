@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -26,7 +20,6 @@ namespace AdventureWorks.Shopper.Services
 
         public async Task ShowAsync(string message, string title, IEnumerable<DialogCommand> dialogCommands)
         {
-            // Only show one dialog at a time.
             if (!_isShowing)
             {
                 var messageDialog = new MessageDialog(message, title);

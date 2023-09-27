@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Globalization;
@@ -13,14 +7,9 @@ using Windows.UI.Xaml;
 using AdventureWorks.Shopper.Common;
 using Windows.UI.Xaml.Controls.Primitives;
 
-// The Group Detail Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234229
 
 namespace AdventureWorks.Shopper.Views
 {
-    /// <summary>
-    /// A page that displays an overview of a single group, including a preview of the items
-    /// within the group.
-    /// </summary>
     public sealed partial class GroupDetailPage : VisualStateAwarePage
     {
         private double _scrollViewerHorizontalOffset;
@@ -32,7 +21,6 @@ namespace AdventureWorks.Shopper.Views
 
         private void itemsGridView_Loaded(object sender, RoutedEventArgs e)
         {
-            // Find the ScrollViewer inside the GridView
             var scrollViewer = VisualTreeUtilities.GetVisualChild<ScrollViewer>(itemsGridView);
 
             if (scrollViewer != null)
@@ -57,7 +45,6 @@ namespace AdventureWorks.Shopper.Views
 
             if (((Visibility)e.NewValue) == Visibility.Visible)
             {
-                // Update the Horizontal offset
                 scrollViewer.ChangeView(_scrollViewerHorizontalOffset, null, null);
                 helper.PropertyChanged -= ScrollBarHorizontalVisibilityChanged;
             };

@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.Collections.Generic;
@@ -33,14 +27,12 @@ namespace AdventureWorks.WebServices.Controllers
             _addressRepository = addressRepository;
         }
 
-        // GET /api/Address
         [Authorize]
         public IEnumerable<Address> GetAll()
         {
             return _addressRepository.GetAll(this.User.Identity.Name);
         }
         
-        // POST /api/Address
         [Authorize]
         public HttpResponseMessage PostAddress(Address address)
         {
@@ -58,7 +50,6 @@ namespace AdventureWorks.WebServices.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, true);
         }
 
-        // PUT /api/Address?defaultAddressId=[defaultAddressId]&addressType=[addressType]
         [Authorize]
         public HttpResponseMessage Put(string defaultAddressId, AddressType addressType)
         {

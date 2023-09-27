@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -80,7 +74,6 @@ namespace AdventureWorks.UILogic.ViewModels
         {
             if (await _accountService.VerifyUserAuthenticationAsync() == null) return;
 
-            // Populate ShippingAddress collection
             var shippingAddresses = (await _checkoutDataRepository.GetAllShippingAddressesAsync()).Select(address => CreateCheckoutData(address, Constants.ShippingAddress));
             ShippingAddresses = new ReadOnlyCollection<CheckoutDataViewModel>(shippingAddresses.ToList());
 
@@ -91,7 +84,6 @@ namespace AdventureWorks.UILogic.ViewModels
                 SetProperty(ref _selectedShippingAddress, selectedShippingAddress, "SelectedShippingAddress");
             }
 
-            // Populate BillingAddress collection
             var billingAddresses = (await _checkoutDataRepository.GetAllBillingAddressesAsync()).Select(address => CreateCheckoutData(address, Constants.BillingAddress));
             BillingAddresses = new ReadOnlyCollection<CheckoutDataViewModel>(billingAddresses.ToList());
 
@@ -102,7 +94,6 @@ namespace AdventureWorks.UILogic.ViewModels
                 SetProperty(ref _selectedBillingAddress, selectedBillingAddress, "SelectedBillingAddress");
             }
 
-            // Populate PaymentMethod collection
             var paymentMethods = (await _checkoutDataRepository.GetAllPaymentMethodsAsync()).Select(CreateCheckoutData);
             PaymentMethods = new ReadOnlyCollection<CheckoutDataViewModel>(paymentMethods.ToList());
 

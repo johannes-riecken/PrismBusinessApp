@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +6,6 @@ using Microsoft.Practices.Prism.StoreApps;
 
 namespace AdventureWorks.UILogic.Models
 {
-    // Documentation on validating user input is at http://go.microsoft.com/fwlink/?LinkID=288817&clcid=0x409
 
     public class PaymentMethod : ValidatableBindableBase
     {
@@ -23,13 +16,9 @@ namespace AdventureWorks.UILogic.Models
         private string _expirationYear;
         private string _phone;
         private string _cardVerificationCode;
-        // Regex rules for the fields.
-        // Notice that you might need more complex rules in your app.
 
-        // We allow all Unicode letter characters as well as internal spaces and hypens, as long as these do not occur in sequences.
         private const string NAMES_REGEX_PATTERN = @"\A\p{L}+([\p{Zs}\-][\p{L}]+)*\z";
 
-        // We allow only numbers and hypens, as long as these do not occur in sequences.
         private const string NUMBERS_REGEX_PATTERN = @"\A\d+([\d\-][\d]+)*\z";
 
         private const string MONTHNUMBERS_REGEX_PATTERN = @"\A(0?[1-9]|1[0-2])\z";

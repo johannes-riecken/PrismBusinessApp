@@ -1,9 +1,3 @@
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
-// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
-// PARTICULAR PURPOSE.
-//
-// Copyright (c) Microsoft Corporation. All rights reserved
 
 
 using System;
@@ -21,7 +15,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace AdventureWorks.UILogic.ViewModels
 {
-    // Documentation on using search can be found at http://go.microsoft.com/fwlink/?LinkID=288822&clcid=0x409
 
     public class SearchResultsPageViewModel : ViewModel
     {
@@ -110,11 +103,9 @@ namespace AdventureWorks.UILogic.ViewModels
                     productViewModels.Add(new ProductViewModel(product));
                 }
 
-                // Communicate results through the view model
                 this.Results = new ReadOnlyCollection<ProductViewModel>(productViewModels);
                 this.NoResults = !this.Results.Any();
 
-                // Update VM status
                 PreviousSearchTerm = SearchTerm;
                 _searchPaneService.ShowOnKeyboardInput(true);
             }
