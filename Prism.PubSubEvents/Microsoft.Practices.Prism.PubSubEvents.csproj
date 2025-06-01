@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>Microsoft.Practices.Prism.PubSubEvents</AssemblyName>
     <RootNamespace>Microsoft.Practices.Prism.PubSubEvents</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
