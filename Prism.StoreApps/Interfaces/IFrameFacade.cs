@@ -1,4 +1,4 @@
-
+/*
 
 using System;
 using Windows.UI.Xaml;
@@ -27,8 +27,9 @@ namespace Microsoft.Practices.Prism.StoreApps.Interfaces
 
         object GetValue(DependencyProperty dependencyProperty);
 
-        void SetValue(DependencyProperty dependencyProperty, object value);       
-        
+        void SetValue(DependencyProperty dependencyProperty, object value);
+
         void ClearValue(DependencyProperty dependencyProperty);
     }
 }
+*/

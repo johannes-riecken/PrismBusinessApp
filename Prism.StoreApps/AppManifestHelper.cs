@@ -1,4 +1,4 @@
-
+/*
 
 using System.Xml.Linq;
 
@@ -37,3 +37,4 @@ namespace Microsoft.Practices.Prism.StoreApps
         }
     }
 }
+*/

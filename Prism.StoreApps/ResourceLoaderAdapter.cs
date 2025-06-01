@@ -1,4 +1,4 @@
-
+/*
 
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Windows.ApplicationModel.Resources;
@@ -20,3 +20,4 @@ namespace Microsoft.Practices.Prism.StoreApps
         }
     }
 }
+*/

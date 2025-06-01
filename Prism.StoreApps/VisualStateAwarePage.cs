@@ -1,4 +1,4 @@
-
+/*
 
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using System;
@@ -23,7 +23,7 @@ namespace Microsoft.Practices.Prism.StoreApps
         public int MinimalLayoutWidth { get; set; }
 
         public static Func<IFrameFacade, IDictionary<string, object>> GetSessionStateForFrame { get; set; }
- 
+
         private List<Control> _visualStateAwareControls;
 
         public VisualStateAwarePage()
@@ -175,7 +175,7 @@ namespace Microsoft.Practices.Prism.StoreApps
             this.InvalidateVisualState(e.Size.Width, e.Size.Height);
         }
 
-      
+
         public void StopLayoutUpdates(object sender, RoutedEventArgs eventArgs)
         {
             var control = sender as Control;
@@ -190,17 +190,17 @@ namespace Microsoft.Practices.Prism.StoreApps
 
         protected virtual string DetermineVisualState(double width, double height)
         {
-            if (width <= MinimalLayoutWidth) 
-            { 
-                return MinimalLayoutVisualState; 
-            } 
-            
-            if (width < height) 
-            { 
-                return PortraitLayoutVisualState; 
-            } 
-            
-            return DefaultLayoutVisualState; 
+            if (width <= MinimalLayoutWidth)
+            {
+                return MinimalLayoutVisualState;
+            }
+
+            if (width < height)
+            {
+                return PortraitLayoutVisualState;
+            }
+
+            return DefaultLayoutVisualState;
         }
 
         public void InvalidateVisualState(double width, double height)
@@ -268,3 +268,4 @@ namespace Microsoft.Practices.Prism.StoreApps
         #endregion
     }
 }
+*/

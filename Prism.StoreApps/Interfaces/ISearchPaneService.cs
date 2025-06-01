@@ -1,5 +1,6 @@
 
 
+/*
 namespace Microsoft.Practices.Prism.StoreApps.Interfaces
 {
     public interface ISearchPaneService
@@ -11,3 +12,4 @@ namespace Microsoft.Practices.Prism.StoreApps.Interfaces
         bool IsShowOnKeyboardInputEnabled();
     }
 }
+*/

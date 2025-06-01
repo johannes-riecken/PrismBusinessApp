@@ -1,11 +1,11 @@
-
+/*
 
 using Microsoft.Practices.Prism.StoreApps.Interfaces;
 using Windows.ApplicationModel.Search;
 
 namespace Microsoft.Practices.Prism.StoreApps
 {
-    
+
     public class SearchPaneService : ISearchPaneService
     {
         public void Show()
@@ -29,3 +29,4 @@ namespace Microsoft.Practices.Prism.StoreApps
         }
     }
 }
+*/

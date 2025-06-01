@@ -1,4 +1,4 @@
-
+/*
 
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Microsoft.Practices.Prism.StoreApps
 {
-    
+
     public class SessionStateService : ISessionStateService
     {
         private Dictionary<string, object> _sessionState = new Dictionary<string, object>();
@@ -211,3 +211,4 @@ namespace Microsoft.Practices.Prism.StoreApps
         }
     }
 }
+*/
