@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using Windows.ApplicationModel.Resources;
 
 namespace Microsoft.Practices.Prism.StoreApps
 {
@@ -29,7 +28,7 @@ namespace Microsoft.Practices.Prism.StoreApps
         }
 
         public BindableValidator(INotifyPropertyChanged entityToValidate)
-        {
+{
             if (entityToValidate == null)
             {
                 throw new ArgumentNullException("entityToValidate");
@@ -39,8 +38,10 @@ namespace Microsoft.Practices.Prism.StoreApps
             IsValidationEnabled = true;
             _getResourceDelegate = (mapId, key) =>
             {
-                var resourceLoader = ResourceLoader.GetForCurrentView(mapId);
-                return resourceLoader.GetString(key);
+                // ResourceLoader.GetForCurrentView(mapId) was here.
+                // Returning the key itself as a fallback.
+                // Applications can provide a custom delegate for proper resource loading.
+                return key;
             };
         }
 

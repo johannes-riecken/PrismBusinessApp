@@ -1,10 +1,10 @@
+/*
 
 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using Windows.UI.Xaml;
 
 namespace Microsoft.Practices.Prism.StoreApps
 {
@@ -41,7 +41,7 @@ namespace Microsoft.Practices.Prism.StoreApps
             DependencyProperty.RegisterAttached("AutoWireViewModel", typeof(bool), typeof(ViewModelLocator), 
             new PropertyMetadata(false, AutoWireViewModelChanged));
 
-        public static bool GetAutoWireViewModel(DependencyObject obj)
+//         public static bool GetAutoWireViewModel(DependencyObject obj)
         {
             if (obj != null)
             {
@@ -50,19 +50,19 @@ namespace Microsoft.Practices.Prism.StoreApps
             return false;
         }
 
-        public static void SetAutoWireViewModel(DependencyObject obj, bool value)
+//         public static void SetAutoWireViewModel(DependencyObject obj, bool value)
         {
             if (obj != null)
             {
-                obj.SetValue(AutoWireViewModelProperty, value);
+//                 obj.SetValue(AutoWireViewModelProperty, value);
             }
         }
 
         #endregion
 
-        private static void AutoWireViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+//         private static void AutoWireViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            FrameworkElement view = d as FrameworkElement;
+//         FrameworkElement view = d as FrameworkElement;            FrameworkElement view = d as FrameworkElement;
             if (view == null) return; // Incorrect hookup, do no harm
 
             object viewModel = GetViewModelForView(view);
@@ -89,3 +89,4 @@ namespace Microsoft.Practices.Prism.StoreApps
         }
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 
 
 using Windows.ApplicationModel.Activation;
@@ -30,3 +31,4 @@ namespace Microsoft.Practices.Prism.StoreApps
         public string QueryText { get; set; }
     }
 }
+*/

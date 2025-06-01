@@ -1,6 +1,6 @@
+/*
 
 
-using Windows.Security.Credentials;
 
 namespace Microsoft.Practices.Prism.StoreApps.Interfaces
 {
@@ -13,3 +13,4 @@ namespace Microsoft.Practices.Prism.StoreApps.Interfaces
         void RemoveSavedCredentials(string resource);
     }
 }
+*/

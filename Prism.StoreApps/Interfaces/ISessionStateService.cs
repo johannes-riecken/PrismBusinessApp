@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
 namespace Microsoft.Practices.Prism.StoreApps.Interfaces
 {
@@ -20,10 +19,10 @@ namespace Microsoft.Practices.Prism.StoreApps.Interfaces
 
         void RestoreFrameState();
 
-        void RegisterFrame(IFrameFacade frame, String sessionStateKey);
+        // void RegisterFrame(IFrameFacade frame, String sessionStateKey);
 
-        void UnregisterFrame(IFrameFacade frame);
+        // void UnregisterFrame(IFrameFacade frame);
 
-        Dictionary<String, Object> GetSessionStateForFrame(IFrameFacade frame);
+        // Dictionary<String, Object> GetSessionStateForFrame(IFrameFacade frame);
     }
 }
